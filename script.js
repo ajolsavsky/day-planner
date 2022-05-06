@@ -5,41 +5,35 @@ var timeblocksEl = $(".timeblocks");
 
 
 
-
+//Dynamically render scheduler
 function renderTimes() {
-    var containerDiv = $('div').addClass('input-group mb-3');
+    var time = [
+        '9AM',
+        '10AM',
+        '11AM',
+        '12PM',
+        '1PM',
+        '2PM',
+        '3PM',
+        '4PM',
+        '5PM',
+    ];
 
-    var timeSpan = $('<span>').addClass('input-group-text');
+    for (var i = 0; i < time.length; i++) {
+        var containerDiv = $('<div>').addClass('input-group mb-3');
+        var timeSpan = $('<span>').addClass('input-group-text');
+        var plannerInput = $('<input type="text">').addClass('form-control');
+        var saveButton = $('<button type="button">').addClass('btn btn-outline-secondary').text('Save');
+        
+        timeblocksEl.append(containerDiv);
 
-    var plannerInput = $('<input type="text">').addClass('form-control');
+        timeSpan.text(time[i]);
+        containerDiv.append(
+            timeSpan,
+            plannerInput,
+            saveButton)
 
-    var saveButton = $('<button type="button">').addClass('btn btn-outline-secondary').text('Save');
-    
-    containerDiv.append(
-        timeSpan,
-        plannerInput,
-        saveButton
-    );
-
-    timeblocksEl.append(containerDiv);
-
-    // var time = [
-    //     '9AM',
-    //     '10AM',
-    //     '11AM',
-    //     '12PM',
-    //     '1PM',
-    //     '2PM',
-    //     '3PM',
-    //     '4PM',
-    //     '5PM',
-    // ];
-
-    // for (var i = 0; i < time.length; i++) {
-    //     var containerDiv = $('<div>');
-    //     containerDiv.addClass('input-group mb-3');
-
-    // }
+    }
 }
 
 renderTimes();
