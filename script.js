@@ -23,9 +23,9 @@ function renderTimes() {
     // Loop that dyamically renders times to the page
     for (var i = 0; i < time.length; i++) {
         var containerDiv = $('<div>').addClass('input-group pr-4 pl-4');
-        var timeSpan = $('<span>').addClass('input-group-text');
-        var plannerInput = $('<input type="text">').addClass('form-control');
-        var saveButton = $('<button type="button">').addClass('btn btn-outline-secondary').text('Save');
+        var timeSpan = $('<span>').addClass('input-group-text').attr('id', 'timeSpan' + [i]);
+        var plannerInput = $('<input type="text">').addClass('form-control').attr('id', 'planner' + [i]);
+        var saveButton = $('<button type="button">').addClass('btn btn-outline-secondary').text('Save').attr('id', 'button' + [i]);
 
         var currentScheduleIndex = time[i];
         //Convert array string to a moment
@@ -63,6 +63,24 @@ function renderTimes() {
 }
 
 renderTimes();
+
+function handleInputData(event) {
+    event.preventDefault();
+
+    console.log(event.target);
+    var btnClicked = $(event.target);
+    var currentInput = btnClicked.parent().children().eq(1)[0].value;
+    console.log(currentInput)
+    var currentInputId = btnClicked.parent().children().eq(1)[0].id;
+    console.log(currentInputId)
+
+
+    localStorage.setItem(currentInputId, JSON.stringify(currentInput))
+
+}
+
+
+timeblocksEl.on('click', '.btn', handleInputData)
 
 
 //TODO: Event propogation to the timeblocks div for buttons/text input
